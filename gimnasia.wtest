@@ -3,41 +3,51 @@ import gimnasia.*
 describe "rutinas" {
 
 //Punto 1: rutinas
-//	const correrEnLaPlaya = // Una actividad de running con intensisdad 1.2
-//	const remarEnElDelta = // Una actividad de remo
-//	const remarEnCaminoRemeros = // Una actividad de remo comptetitivo
-//	const maratonBA = //Una maraton con intensidad 1.5
+	const correrEnLaPlaya = new Running(intensidad = 1.2)
+	const remarEnElDelta = new Remo()
+	const remarEnCaminoRemeros = new RemoDeCompeticion()
+	const maratonBA = new Maratón(intensidad = 1.5)
 
 //Punto 2: personas
-	//const calamardo = //Una persona Sedentaria con peso 60 y tiempo de ejercicio 5
- 	//const bob =  // Una persona atleta con peso 40 
+	const calamardo = new Sedentario(peso = 60,tiempo = 5)//Una persona Sedentaria con peso 60 y tiempo de ejercicio 5
+ 	const bob =  new Atleta(peso = 40)// Una persona atleta con peso 40 
 
 //Punto 3: clubes
-	//const recreo = //un predio con correrEnLaPlaya y maratonBA
-	//const nautico = //un predio con remarEnElDelta y remarEnCaminoRemeros
-	//const clubBarrial = //un club con recreo y nautico
-//	
-//
+	const recreo = new Predio()//un predio con correrEnLaPlaya y maratonBA
+	const nautico = new Predio()//un predio con remarEnElDelta y remarEnCaminoRemeros
+	const clubBarrial = new Club()//un club con recreo y nautico
+
+  method initialize() {
+	recreo.agregarRutinas(#{correrEnLaPlaya,maratonBA})
+	nautico.agregarRutinas(#{remarEnElDelta,remarEnCaminoRemeros})
+	clubBarrial.agregarPredios(#{nautico,recreo})
+  }
 // PUNTO 1
-//	test "1.1 consulta running" {
-//		//correrEnLaPlaya deberia gastar 360 calorias al practicarse por 5 minutos
-//		//correrEnLaPlaya deberia gastar 10200 calorias al practicarse por 90 minutos
-//	}
+	test "1.1 consulta running" {
+		assert.equals(360, correrEnLaPlaya.caloriasConsumidas(calamardo))
+		assert.equals(10200, correrEnLaPlaya.caloriasConsumidas(bob))
+	}
 
-//	test "1.2 consulta maraton" {
-//		//maratonBA deberia gastar 900 calorias al practicarse por 5 minutos
-//		//maratonBA deberia gastar 25500 calorias al practicarse por 90 minutos
-//	}
+	test "1.2 consulta maraton" {
+        assert.equals(900, maratonBA.caloriasConsumidas(calamardo))
+		assert.equals(25500, maratonBA.caloriasConsumidas(bob))
+		//maratonBA deberia gastar 900 calorias al practicarse por 5 minutos
+		//maratonBA deberia gastar 25500 calorias al practicarse por 90 minutos
+	}
 
-//	test "1.3 consulta remo" {
-//		//remarEnElDelta deberia gastar 520 calorias al practicarse por 5 minutos
-//		//remarEnElDelta deberia gastar 9360 calorias al practicarse por 90 minutos
-//	}
+	test "1.3 consulta remo" {
+		assert.equals(520, remarEnElDelta.caloriasConsumidas(calamardo))
+		assert.equals(9360, remarEnElDelta.caloriasConsumidas(bob))
+		//remarEnElDelta deberia gastar 520 calorias al practicarse por 5 minutos
+		//remarEnElDelta deberia gastar 9360 calorias al practicarse por 90 minutos
+	}
 
-//	test "1.4 consulta remo competitivo" {
-//		//remarEnCaminoRemeros deberia gastar 510 calorias al practicarse por 5 minutos
-//		//remarEnCaminoRemeros deberia gastar 12750 calorias al practicarse por 90 minutos
-//	}
+	test "1.4 consulta remo competitivo" {
+		assert.equals(510, remarEnCaminoRemeros.caloriasConsumidas(calamardo))
+		assert.equals(12750, remarEnCaminoRemeros.caloriasConsumidas(bob))
+		//remarEnCaminoRemeros deberia gastar 510 calorias al practicarse por 5 minutos
+		//remarEnCaminoRemeros deberia gastar 12750 calorias al practicarse por 90 minutos
+	}
 
 //Punto 2: Personas
 	//ATENCION: usar el metodo truncate(3) para truncar un numero a 3 decimales
